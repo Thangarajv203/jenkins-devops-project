@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI-CD Pipeline
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-test:
+  pipeline:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,6 +22,25 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Run tests
+      - name: Run Unit Tests
         run: |
           pytest
+
+      - name: Build Artifact (Simulate Docker Build)
+        run: |
+          echo "Building Docker image..."
+          echo "docker build -t app:latest ."
+
+      - name: Push Artifact (Simulate Artifactory)
+        run: |
+          echo "Pushing image to Artifactory..."
+          echo "docker push app:latest"
+
+      - name: Security Scan (Simulated)
+        run: |
+          echo "Running security scan..."
+          echo "Scan passed"
+
+      - name: Deploy (Simulate Helm + OpenShift)
+        run: |
+          echo "Deploying to OpenShift using Helm..."
